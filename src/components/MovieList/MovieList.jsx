@@ -12,23 +12,14 @@ function MovieList() {
     dispatch({ type: 'FETCH_MOVIES' });
   }, []);
 
-  const routeDetails = (id) => {
-    console.log('in route details with id', id);
-    history.push({ pathname: `/details/${id}`, state: id });
-  };
-
-  const routeAdd = () => {
-      history.push('/addMovie')
-  }
-
   return (
     <main>
       <h1>MovieList</h1>
-      <button onClick={routeAdd}>Add Movie</button>
+      <button onClick={() => {history.push('/addMovie')}}>Add Movie</button>
       <section className="movies">
         {movies.map((movie) => {
           return (
-            <div key={movie.id} onClick={() => routeDetails(movie.id)}>
+            <div key={movie.id} onClick={() => {history.push({ pathname: `/details/${movie.id}`})}}>
               <h3>{movie.title}</h3>
               <img src={movie.poster} alt={movie.title} />
             </div>

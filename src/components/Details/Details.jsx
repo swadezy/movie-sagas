@@ -12,7 +12,9 @@ function Details() {
     dispatch({ type: 'FETCH_DETAILS', payload: page.id });
   }, []);
 
-  const handleEdit = () => {};
+  const handleEdit = () => {
+    history.push({ pathname: `/edit/${page.id}`})
+  };
 
   const handleDelete = () => {
     dispatch({ type: 'DELETE_MOVIE', payload: page.id });
