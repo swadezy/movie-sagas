@@ -33,6 +33,30 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// deletes movie first from junction table, then from movie table
+router.delete('/:id', (req, res) => {
+  console.log('in delete with movie id', req.params.id);
+  const junctionDeleteQuery = `DELETE from "movies_genres" WHERE "movie_id" = $1`;
+  pool
+    .query(junctionDeleteQuery, [req.params.id])
+    .then((result) => {
+      console.log('deleted movie from junction table');
+      const movieDeleteQuery = `DELETE from "movies" WHERE "id" = $1;`;
+      pool
+        .query(movieDeleteQuery, [req.params.id])
+        .then((result) => {
+          console.log('deleted movie from movie table');
+        })
+        .catch((error) => {
+          console.log('error in movie table delete', error);
+        });
+    })
+    .catch((error) => {
+      console.log('error in junction table delete', error);
+      res.sendStatus(500);
+    });
+});
+
 router.post('/', (req, res) => {
   console.log('in post server with', req.body);
   // RETURNING "id" will give us back the id of the created movie

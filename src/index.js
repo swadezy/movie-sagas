@@ -15,6 +15,7 @@ import axios from 'axios';
 function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', fetchAllMovies);
   yield takeEvery('POST_MOVIE', postMovie);
+  yield takeEvery('DELETE_MOVIE', deleteMovie);
   yield takeEvery('FETCH_GENRES', fetchGenres);
   yield takeEvery('FETCH_DETAILS', fetchDetails);
 }
@@ -34,6 +35,16 @@ function* postMovie(action) {
   try {
     console.log('in post with movie', action.payload);
     yield axios.post('/api/movie', action.payload);
+    yield put({ type: 'FETCH_MOVIES' });
+  } catch (error) {
+    console.log('error received', error);
+  }
+}
+
+function* deleteMovie(action) {
+  try {
+    console.log('in delete for movie id', action.payload);
+    yield axios.delete(`api/movie/${action.payload}`);
     yield put({ type: 'FETCH_MOVIES' });
   } catch (error) {
     console.log('error received', error);

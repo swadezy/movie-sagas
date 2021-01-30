@@ -12,17 +12,29 @@ function Details() {
     dispatch({ type: 'FETCH_DETAILS', payload: page.id });
   }, []);
 
-  const routeBack = () => {
-    history.push('/')
-  }
+  const handleEdit = () => {};
+
+  const handleDelete = () => {
+    dispatch({ type: 'DELETE_MOVIE', payload: page.id });
+    history.push('/');
+  };
 
   return (
     <main>
       <h3>{movie?.title}</h3>
       <img src={movie?.poster} alt={movie?.title} />
+      <br></br>
+      <button onClick={handleEdit}>Edit</button>
+      <button onClick={handleDelete}>Delete</button>
       <h5>{movie?.description}</h5>
       <h5>{movie?.genres}</h5>
-      <button onClick={routeBack}>Back to List</button>
+      <button
+        onClick={() => {
+          history.push('/');
+        }}
+      >
+        Back to List
+      </button>
     </main>
   );
 }
