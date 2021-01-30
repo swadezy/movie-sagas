@@ -40,15 +40,7 @@ function Details() {
       <button onClick={handleDelete}>Delete</button>
       <h5>{movie?.description}</h5>
       <h5>{movie?.genres}</h5>
-
-      {/* back button routes home on click */}
-      <button
-        onClick={() => {
-          history.push('/');
-        }}
-      >
-        Back to List
-      </button>
+      
     </main>
   );
 }
