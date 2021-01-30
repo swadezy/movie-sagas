@@ -34,7 +34,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log(req.body);
+  console.log('in post server with', req.body);
   // RETURNING "id" will give us back the id of the created movie
   const insertMovieQuery = `
   INSERT INTO "movies" ("title", "poster", "description")
@@ -55,7 +55,7 @@ router.post('/', (req, res) => {
 
       // Now handle the genre reference
       const insertMovieGenreQuery = `
-      INSERT INTO "movies_genres" ("movies_id", "genres_id")
+      INSERT INTO "movies_genres" ("movie_id", "genre_id")
       VALUES  ($1, $2);
       `;
       // SECOND QUERY ADDS GENRE FOR THAT NEW MOVIE

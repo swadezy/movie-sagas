@@ -1,15 +1,21 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 function AddMovie() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const genres = useSelector((store) => store.genres);
   const [newMovie, setNewMovie] = useState({
     title: '',
     poster: '',
     description: '',
+    genre_id: 1,
   });
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_GENRES' });
+  }, []);
 
   const routeBack = () => {
     history.push('/');
@@ -18,6 +24,8 @@ function AddMovie() {
   const addMovie = (event) => {
     event.preventDefault();
     console.log('in addMovie with movie', newMovie);
+    dispatch({ type: 'POST_MOVIE', payload: newMovie });
+    history.push('/')
   };
 
   return (
@@ -49,8 +57,18 @@ function AddMovie() {
             setNewMovie({ ...newMovie, description: event.target.value })
           }
         />
-        <select>
-          <option></option>
+        <select
+          name="category"
+          onChange={(event) =>
+            setNewMovie({ ...newMovie, genre_id: event.target.value })
+          }
+        >
+          {genres &&
+            genres.map((genre) => (
+              <option key={genre.id} value={genre.id}>
+                {genre.name}
+              </option>
+            ))}
         </select>
         <button type="submit">Submit</button>
         <button onClick={routeBack}>Cancel</button>
