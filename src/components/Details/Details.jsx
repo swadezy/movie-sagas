@@ -3,24 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 function Details() {
-  const dispatch = useDispatch();
-  const movieObject = useSelector((store) => store.movies);
-
   const page = useParams();
+  const dispatch = useDispatch();
+  const movie = useSelector((store) => store.details[0]);
 
   useEffect(() => {
-    console.log('in details of id', page.id);
-    dispatch({ type: 'FETCH_DETAIL', payload: page.id });
-    console.log(movieObject);
+    dispatch({ type: 'FETCH_DETAILS', payload: page.id });
   }, []);
 
   return (
-    <div>
-        {movieObject && <h3>{JSON.stringify.movieObject}</h3>}
-      <h1>{movieObject?.movies?.title}</h1>
-      <h1>{JSON.stringify?.movieObject}</h1>
-      <h1>Fart</h1>
-    </div>
+    <main>
+      <h3>{movie?.title}</h3>
+      <img src={movie?.poster} alt={movie?.title} />
+      <h5>{movie?.description}</h5>
+      <h5>{movie?.genres}</h5>
+    </main>
   );
 }
 

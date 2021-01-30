@@ -10,7 +10,6 @@ function MovieList() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_MOVIES' });
-    console.log('movies are',movies);
   }, []);
 
   const routeDetails = (id) => {
