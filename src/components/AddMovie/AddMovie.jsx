@@ -5,7 +5,16 @@ import { useHistory } from 'react-router-dom';
 function AddMovie() {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  // tells saga watchers to work with db to store genres in genres reducer
+  useEffect(() => {
+    dispatch({ type: 'FETCH_GENRES' });
+  }, []);
+
+  // gets genre list from genres reducer and saves locally
   const genres = useSelector((store) => store.genres);
+
+  // saves new movie info in state to be passed to db by saga watchers
   const [newMovie, setNewMovie] = useState({
     title: '',
     poster: '',
@@ -13,17 +22,9 @@ function AddMovie() {
     genre_id: 1,
   });
 
-  useEffect(() => {
-    dispatch({ type: 'FETCH_GENRES' });
-  }, []);
-
-  const routeBack = () => {
-    history.push('/');
-  };
-
+  // tells saga watchers to add the new movie, then routes back to details page
   const addMovie = (event) => {
     event.preventDefault();
-    console.log('in addMovie with movie', newMovie);
     dispatch({ type: 'POST_MOVIE', payload: newMovie });
     history.push('/');
   };
@@ -31,7 +32,6 @@ function AddMovie() {
   return (
     <div>
       <h3>AddMovie</h3>
-      <button onClick={routeBack}>Back to List</button>
       <form onSubmit={addMovie}>
         <input
           type="text"
@@ -63,6 +63,7 @@ function AddMovie() {
             setNewMovie({ ...newMovie, genre_id: event.target.value })
           }
         >
+          {/* maps over genres to create option for each */}
           {genres &&
             genres.map((genre) => (
               <option key={genre.id} value={genre.id}>
@@ -71,12 +72,13 @@ function AddMovie() {
             ))}
         </select>
         <button type="submit">Submit</button>
+        {/* routes back home on click */}
         <button
           onClick={() => {
             history.push('/');
           }}
         >
-          Back to List
+          Cancel
         </button>
       </form>
     </div>

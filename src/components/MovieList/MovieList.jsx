@@ -6,20 +6,37 @@ import './MovieList.css';
 function MovieList() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const movies = useSelector((store) => store.movies);
 
+  // tells saga watchers to work with db to store full movie list in movies reducer
   useEffect(() => {
     dispatch({ type: 'FETCH_MOVIES' });
   }, []);
 
+  // gets full movie list from movies reducer and saves locally
+  const movies = useSelector((store) => store.movies);
+
   return (
     <main>
-      <h1>MovieList</h1>
-      <button onClick={() => {history.push('/addMovie')}}>Add Movie</button>
+      <h3>Movie List</h3>
+      {/* routes to add movie page on click */}
+      <button
+        onClick={() => {
+          history.push('/addMovie');
+        }}
+      >
+        Add Movie
+      </button>
       <section className="movies">
+        {/* maps over movie list and creates div for each */}
         {movies.map((movie) => {
           return (
-            <div key={movie.id} onClick={() => {history.push({ pathname: `/details/${movie.id}`})}}>
+            <div
+              key={movie.id}
+              // routes to dedicated details page on click
+              onClick={() => {
+                history.push({ pathname: `/details/${movie.id}` });
+              }}
+            >
               <h3>{movie.title}</h3>
               <img src={movie.poster} alt={movie.title} />
             </div>
