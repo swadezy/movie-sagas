@@ -4,9 +4,7 @@ import { useParams } from 'react-router-dom';
 
 function Details() {
   const dispatch = useDispatch();
-  const movieObject = useSelector(store => store.movies)
-  const movieDetails = movieObject.movies;
-  const movieGenres = movieObject.genres;
+  const movieObject = useSelector((store) => store.movies);
 
   const page = useParams();
 
@@ -17,8 +15,13 @@ function Details() {
   }, []);
 
   return (
-      <h1>{movieDetails?.title}</h1>
-  )
+    <div>
+        {movieObject && <h3>{JSON.stringify.movieObject}</h3>}
+      <h1>{movieObject?.movies?.title}</h1>
+      <h1>{JSON.stringify?.movieObject}</h1>
+      <h1>Fart</h1>
+    </div>
+  );
 }
 
 export default Details;
