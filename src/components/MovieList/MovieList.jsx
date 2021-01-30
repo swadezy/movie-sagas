@@ -17,9 +17,14 @@ function MovieList() {
     history.push({ pathname: `/details/${id}`, state: id });
   };
 
+  const routeAdd = () => {
+      history.push('/addMovie')
+  }
+
   return (
     <main>
       <h1>MovieList</h1>
+      <button onClick={routeAdd}>Add Movie</button>
       <section className="movies">
         {movies.map((movie) => {
           return (
