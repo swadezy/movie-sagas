@@ -16,6 +16,7 @@ function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', fetchAllMovies);
   yield takeEvery('POST_MOVIE', postMovie);
   yield takeEvery('DELETE_MOVIE', deleteMovie);
+  yield takeEvery('PUT_MOVIE', putMovie);
   yield takeEvery('FETCH_GENRES', fetchGenres);
   yield takeEvery('FETCH_DETAILS', fetchDetails);
 }
@@ -46,6 +47,16 @@ function* deleteMovie(action) {
     console.log('in delete for movie id', action.payload);
     yield axios.delete(`api/movie/${action.payload}`);
     yield put({ type: 'FETCH_MOVIES' });
+  } catch (error) {
+    console.log('error received', error);
+  }
+}
+
+function* putMovie(action) {
+  try {
+      console.log('in put movie for movie id', action.payload.id);
+      yield axios.put(`api/movie/${action.payload.id}`, action.payload);
+      yield put({ type: 'FETCH_MOVIES'});
   } catch (error) {
     console.log('error received', error);
   }

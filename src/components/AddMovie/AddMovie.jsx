@@ -25,7 +25,7 @@ function AddMovie() {
     event.preventDefault();
     console.log('in addMovie with movie', newMovie);
     dispatch({ type: 'POST_MOVIE', payload: newMovie });
-    history.push('/')
+    history.push('/');
   };
 
   return (
@@ -71,7 +71,13 @@ function AddMovie() {
             ))}
         </select>
         <button type="submit">Submit</button>
-        <button onClick={routeBack}>Cancel</button>
+        <button
+          onClick={() => {
+            history.push('/');
+          }}
+        >
+          Back to List
+        </button>
       </form>
     </div>
   );
