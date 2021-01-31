@@ -14,7 +14,8 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-  yield takeEvery('FILTER_MOVIES', filterMovies);
+  yield takeEvery('FILTER_MOVIES_STRING', filterMovies);
+  yield takeEvery('FILTER_MOVIES_GENRE', filterMoviesGenre);
   yield takeEvery('POST_MOVIE', postMovie);
   yield takeEvery('DELETE_MOVIE', deleteMovie);
   yield takeEvery('PUT_MOVIE', putMovie);
@@ -35,8 +36,20 @@ function* fetchAllMovies() {
 
 function* filterMovies(action) {
   try {
-    const movies = yield axios.get(`/api/movie/filter/${action.payload}`);
+    console.log('filterMovies received', action.payload);
+    const movies = yield axios.get(`/api/movie/search/${action.payload}`);
     console.log('filtered with query:', movies.data);
+    yield put({ type: 'SET_MOVIES', payload: movies.data });
+  } catch (error) {
+    console.log('error received', error);
+  }
+}
+
+function* filterMoviesGenre(action) {
+  try {
+    console.log('filterMoviesGenre received', action.payload);
+    const movies = yield axios.get(`/api/movie/genre/${action.payload}`);
+    console.log('filtered with genre', movies.data);
     yield put({ type: 'SET_MOVIES', payload: movies.data });
   } catch (error) {
     console.log('error received', error);

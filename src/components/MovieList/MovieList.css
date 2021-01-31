@@ -2,3 +2,12 @@
     display : flex;
     flex-wrap: wrap;
 }
+
+.inline {
+    display: inline;
+}
+
+.radio-genre {
+    display: inline-block;
+    padding: 0px 15px;
+}

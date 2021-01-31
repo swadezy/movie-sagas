@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -58,7 +58,7 @@ function AddMovie() {
           }
         />
         <select
-          name="category"
+          name="genre"
           onChange={(event) =>
             setNewMovie({ ...newMovie, genre_id: event.target.value })
           }

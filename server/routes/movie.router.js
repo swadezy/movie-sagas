@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
 });
 
 
-router.get('/filter/:query', (req, res) => {
+router.get('/search/:query', (req, res) => {
   console.log('received filter query', req.params.query);
   const filterText = '%'+req.params.query+'%';
   const query = `SELECT * FROM "movies"
@@ -46,8 +46,26 @@ router.get('/filter/:query', (req, res) => {
     .query(query, [filterText])
     .then((result) => {
       console.log(result.rows);
-      console.log(query);
-      
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log('ERROR: Get all movies', err);
+      res.sendStatus(500);
+    });
+});
+
+
+
+router.get('/genre/:id', (req, res) => {
+  console.log('received filter genre', req.params.id);
+  const query = `SELECT "movies".id, "movies".title, "movies".poster FROM "movies"
+  JOIN "movies_genres" ON "movies".id = "movies_genres".movie_id
+  JOIN "genres" ON "movies_genres".genre_id = "genres".id
+  WHERE "genres".id = $1;`;
+  pool
+    .query(query, [req.params.id])
+    .then((result) => {
+      console.log(result.rows);
       res.send(result.rows);
     })
     .catch((err) => {
