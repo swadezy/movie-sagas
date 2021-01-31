@@ -1,22 +1,36 @@
 import { HashRouter as Router, Link, useHistory } from 'react-router-dom';
 import './Header.css';
 
+import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
+
 function Header() {
-  const history = useHistory();
   return (
     <Router>
       <header>
         <h1>The Movies Saga!</h1>
         {/* handy little home button for every page */}
-        <Link to="/">
-          <button className="btn">Home</button>
-        </Link>
-        <Link to="/addMovie">
-          <button className="btn">Add Movie</button>
-        </Link>
-        <Link to="/admin">
-          <button className="btn">Admin</button>
-        </Link>
+        <Box m={1} display="inline">
+          <Link to="/">
+            <Button className="btn-padding" variant="contained" color="primary">
+              Home
+            </Button>
+          </Link>
+        </Box>
+        <Box m={1} display="inline">
+          <Link to="/addMovie">
+            <Button className="btn-padding" variant="contained" color="primary">
+              Add Movie
+            </Button>
+          </Link>
+        </Box>
+        <Box m={1} display="inline">
+          <Link to="/admin">
+            <Button className="btn-padding" variant="contained" color="primary">
+              Admin
+            </Button>
+          </Link>
+        </Box>
       </header>
     </Router>
   );

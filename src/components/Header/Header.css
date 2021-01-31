@@ -11,3 +11,8 @@ h1 {
     margin: 0;
     padding: 30px;
 }
+
+.btn-padding {
+    padding: 50px;
+    margin: 100px;
+}
