@@ -1,0 +1,13 @@
+header {
+    margin: auto;
+    min-height: 70px;
+    padding-bottom: 20px;
+    background-color: #003b38;
+    border-bottom: 5px solid black;
+    color: beige;
+}
+
+h1 {
+    margin: 0;
+    padding: 30px;
+}
