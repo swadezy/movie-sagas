@@ -39,8 +39,8 @@ function Details() {
       {/* deletes item from db and routes back home on click */}
       <button onClick={handleDelete}>Delete</button>
       <h5>{movie?.description}</h5>
-      <h5>{movie?.genres}</h5>
-      
+      <h5>Genres: {movie?.genres}</h5>
+
     </main>
   );
 }

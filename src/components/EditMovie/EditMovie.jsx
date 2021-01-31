@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
+import './EditMovie.css';
 
 function EditMovie() {
   const page = useParams();
@@ -31,40 +32,51 @@ function EditMovie() {
   };
 
   return (
-    <div>
+    <div className="edit-movie">
       <h3>Edit Details</h3>
-      <form onSubmit={handleEdit}>
-        <h5>{movie?.title} : </h5>
-        <input
-          type="text"
-          placeholder={movie?.title}
-          value={editMovie.title}
-          onChange={(event) =>
-            setEditMovie({ ...editMovie, title: event.target.value })
-          }
-        />
-        <h5>{movie?.description} : </h5>
-        <textarea
-          type="text"
-          placeholder={movie?.description}
-          value={editMovie.description}
-          onChange={(event) =>
-            setEditMovie({ ...editMovie, description: event.target.value })
-          }
-        />
-        <br></br>
-        <br></br>
-        <button type="submit">Submit</button>
-
-        {/* cancel button routes back to details on click */}
-        <button
-          onClick={() => {
-            history.push({ pathname: `/details/${page.id}` });
-          }}
-        >
-          Cancel
-        </button>
-      </form>
+      <div className="grid-wrapper">
+        <img src={movie?.poster} alt={movie?.title} className="grid-poster" />
+        <h4 className="grid-existing-header">Existing Movie Info</h4>
+        <h4 className="grid-updated-header">Updated Movie Info</h4>
+        <div className="grid-existing-title">{movie?.title}</div>
+        <form onSubmit={handleEdit}>
+          <input
+            type="text"
+            className="grid-title-input"
+            placeholder="...title"
+            value={editMovie.title}
+            onChange={(event) =>
+              setEditMovie({ ...editMovie, title: event.target.value })
+            }
+          />
+        </form>
+        <div className="grid-existing-description">{movie?.description}</div>
+        <form onSubmit={handleEdit}>
+          <textarea
+            type="text"
+            className="grid-description-textarea"
+            placeholder="...description"
+            value={editMovie.description}
+            onChange={(event) =>
+              setEditMovie({ ...editMovie, description: event.target.value })
+            }
+          />
+        </form>
+        <div className="grid-button-group">
+          <button className="grid-button" onClick={handleEdit}>
+            Submit
+          </button>
+          {/* cancel button routes back to details on click */}
+          <button
+            className="grid-button"
+            onClick={() => {
+              history.push({ pathname: `/details/${page.id}` });
+            }}
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

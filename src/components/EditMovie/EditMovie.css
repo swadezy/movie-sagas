@@ -1,0 +1,64 @@
+.edit-movie {
+    width: 80%;
+    margin: auto;
+}
+
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.grid-poster {
+    grid-column: 1;
+    grid-row: 1 / 6;
+    margin: auto;
+    width: 70%
+}
+
+.grid-existing-header {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.grid-updated-header {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.grid-existing-title {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.grid-title-input {
+    padding: 5px;
+    width: 70%;
+    height: 20%;
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.grid-existing-description {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.grid-description-textarea {
+    padding: 10px;
+    width: 70%;
+    height: 70%;
+    grid-column: 3;
+    grid-row: 3;
+}
+
+.grid-button-group {
+    grid-column: 3;
+}
+
+.grid-button-group button {
+    width: 40%;
+    margin: auto 3px;
+    padding: 2px;
+}
+
