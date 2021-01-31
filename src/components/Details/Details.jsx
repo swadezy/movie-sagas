@@ -24,7 +24,7 @@ function Details() {
 
   return (
     <div className="container">
-      <h3>{movie?.title}</h3>
+      <h2>{movie?.title}</h2>
       <img src={movie?.poster} alt={movie?.title} />
       <br></br>
       <br></br>

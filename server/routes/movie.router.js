@@ -3,7 +3,7 @@ const router = express.Router();
 const pool = require('../modules/pool');
 
 router.get('/', (req, res) => {
-  const query = `SELECT * FROM movies ORDER BY "id" ASC`;
+  const query = `SELECT * FROM "movies" ORDER BY "id" ASC`;
   pool
     .query(query)
     .then((result) => {
@@ -25,6 +25,26 @@ router.get('/:id', (req, res) => {
   pool
     .query(query, [req.params.id])
     .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log('ERROR: Get all movies', err);
+      res.sendStatus(500);
+    });
+});
+
+
+router.get('/filter/:query', (req, res) => {
+  console.log('received filter query', req.params.query);
+  const filterText = '%'+req.params.query+'%';
+  const query = `SELECT * FROM "movies"
+  WHERE "movies".title LIKE $1 ORDER BY "id" ASC;`;
+  pool
+    .query(query, [filterText])
+    .then((result) => {
+      console.log(result.rows);
+      console.log(query);
+      
       res.send(result.rows);
     })
     .catch((err) => {

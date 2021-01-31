@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
-router.get('/', (req, res) => {
-  const query = `SELECT * FROM genres ORDER BY "id" ASC`;
+router.get('/:filter', (req, res) => {
+  const query = `SELECT * FROM "movies"
+  WHERE "movies".title LIKE '%$1%' ORDER BY "id" ASC`;
   pool
-    .query(query)
+    .query(query, [])
     .then((result) => {
       res.send(result.rows);
     })

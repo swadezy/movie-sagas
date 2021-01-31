@@ -33,7 +33,7 @@ function EditMovie() {
 
   return (
     <div className="edit-movie">
-      <h3>Edit Details</h3>
+      <h2>Edit Details</h2>
       <div className="grid-wrapper">
         <img src={movie?.poster} alt={movie?.title} className="grid-poster" />
         <h4 className="grid-existing-header">Existing Movie Info</h4>

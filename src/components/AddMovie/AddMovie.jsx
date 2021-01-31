@@ -31,7 +31,7 @@ function AddMovie() {
 
   return (
     <div>
-      <h3>AddMovie</h3>
+      <h2>AddMovie</h2>
       <form onSubmit={addMovie}>
         <input
           type="text"
