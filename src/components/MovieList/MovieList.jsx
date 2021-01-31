@@ -3,6 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './MovieList.css';
 
+// Material UI stuff
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+
 function MovieList() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -83,20 +90,45 @@ function MovieList() {
         Clear Filters
       </button>
 
-      {/* maps over movie list and creates div for each */}
       <section className="movies">
         {movies.map((movie) => {
           return (
-            <div
-              key={movie.id}
-              // routes to dedicated details page on click
-              onClick={() => {
-                history.push({ pathname: `/details/${movie.id}` });
-              }}
-            >
-              <h3>{movie.title}</h3>
-              <img src={movie.poster} alt={movie.title} />
-            </div>
+            <Card className="movie-card" variant="outlined" key={movie.id}>
+              <CardContent>
+                <img
+                  className="card-image"
+                  src={movie.poster}
+                  alt={movie.title}
+                />
+                <h4 className="card-header">{movie.title}</h4>
+              </CardContent>
+              <CardActions>
+                <ButtonGroup className="card-btns">
+                {/* routes to dedicated details page on click */}
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => {
+                    history.push({ pathname: `/details/${movie.id}` });
+                  }}
+                  size="small"
+                >
+                  Details
+                </Button>
+                {/* routes to dedicated edit page on click */}
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={() => {
+                    history.push({ pathname: `/edit/${movie.id}` });
+                  }}
+                  size="small"
+                >
+                  Edit
+                </Button>
+                </ButtonGroup>
+              </CardActions>
+            </Card>
           );
         })}
       </section>
