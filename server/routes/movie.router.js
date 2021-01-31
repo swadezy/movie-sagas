@@ -3,7 +3,10 @@ const router = express.Router();
 const pool = require('../modules/pool');
 
 router.get('/', (req, res) => {
-  const query = `SELECT * FROM "movies" ORDER BY "id" ASC`;
+  // this asks db for movie information, as well as the total number of movies in the db
+  const query = `SELECT "movies".id, "movies".title, "movies".poster, "movies".description, SUM(COUNT("movies")) OVER() AS "total_movies"
+  FROM "movies" GROUP BY "movies".id, "movies".title, "movies".poster, "movies".description
+  ORDER BY "movies".id ASC LIMIT 10`;
   pool
     .query(query)
     .then((result) => {
@@ -38,7 +41,7 @@ router.get('/filter/:query', (req, res) => {
   console.log('received filter query', req.params.query);
   const filterText = '%'+req.params.query+'%';
   const query = `SELECT * FROM "movies"
-  WHERE "movies".title LIKE $1 ORDER BY "id" ASC;`;
+  WHERE "movies".title LIKE $1 ORDER BY "id" ASC LIMIT 10;`;
   pool
     .query(query, [filterText])
     .then((result) => {

@@ -30,6 +30,7 @@ function MovieList() {
     event.preventDefault();
     dispatch({ type: 'FETCH_MOVIES' });
     setSearchQuery('');
+    console.log('total movies are', movies[0].total_movies);
   };
 
   return (
@@ -66,6 +67,9 @@ function MovieList() {
           );
         })}
       </section>
+      
+      {/* page only displays 10 movies - if there are more, this tells user to search for them */}
+      {movies[0].total_movies > 10 ? <h3>use search to find more movies</h3> : <h3>these are all the movies!</h3>}
     </main>
   );
 }
