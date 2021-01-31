@@ -63,12 +63,12 @@ function EditMovie() {
           />
         </form>
         <div className="grid-button-group">
-          <button className="grid-button" onClick={handleEdit}>
+          <button className="btn" onClick={handleEdit}>
             Submit
           </button>
           {/* cancel button routes back to details on click */}
           <button
-            className="grid-button"
+            className="btn"
             onClick={() => {
               history.push({ pathname: `/details/${page.id}` });
             }}

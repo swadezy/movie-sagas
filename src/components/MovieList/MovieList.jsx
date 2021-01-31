@@ -18,14 +18,6 @@ function MovieList() {
   return (
     <main>
       <h3>Movie List</h3>
-      {/* routes to add movie page on click */}
-      <button
-        onClick={() => {
-          history.push('/addMovie');
-        }}
-      >
-        Add Movie
-      </button>
       <section className="movies">
         {/* maps over movie list and creates div for each */}
         {movies.map((movie) => {

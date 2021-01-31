@@ -1,6 +1,7 @@
 .edit-movie {
     width: 80%;
     margin: auto;
+    border-radius: 50px;
 }
 
 .grid-wrapper {

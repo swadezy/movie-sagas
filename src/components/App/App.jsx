@@ -5,6 +5,7 @@ import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
 import AddMovie from '../AddMovie/AddMovie';
 import EditMovie from '../EditMovie/EditMovie';
+import Admin from '../Admin/Admin';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/edit/:id" component={EditMovie} />
         {/* add movie page */}
         <Route path="/addMovie" component={AddMovie} />
+        <Route path="/admin" component={Admin} />
       </Router>
     </div>
   );

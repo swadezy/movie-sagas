@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
+import './Details.css'
 
 function Details() {
   const page = useParams();
@@ -22,13 +23,14 @@ function Details() {
   };
 
   return (
-    <main>
+    <div className="container">
       <h3>{movie?.title}</h3>
       <img src={movie?.poster} alt={movie?.title} />
       <br></br>
-
+      <br></br>
       {/* routes to dedicated edit page on click */}
       <button
+        className="btn"
         onClick={() => {
           history.push({ pathname: `/edit/${page.id}` });
         }}
@@ -37,11 +39,12 @@ function Details() {
       </button>
 
       {/* deletes item from db and routes back home on click */}
-      <button onClick={handleDelete}>Delete</button>
+      <button className="btn" onClick={handleDelete}>
+        Delete
+      </button>
       <h5>{movie?.description}</h5>
       <h5>Genres: {movie?.genres}</h5>
-
-    </main>
+    </div>
   );
 }
 

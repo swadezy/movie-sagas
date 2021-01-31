@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  background-color: beige;
 }
 
 
@@ -18,6 +17,12 @@
 
 .App-intro {
   font-size: large;
+}
+
+.btn {
+  padding: 5px 50px;
+  border-radius: 10px;
+  margin: 10px;
 }
 
 @keyframes App-logo-spin {
