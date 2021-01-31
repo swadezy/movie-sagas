@@ -2,6 +2,14 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+
 function AddMovie() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -19,7 +27,7 @@ function AddMovie() {
     title: '',
     poster: '',
     description: '',
-    genre_id: 1,
+    genre_id: 0,
   });
 
   // tells saga watchers to add the new movie, then routes back to details page
@@ -31,55 +39,83 @@ function AddMovie() {
 
   return (
     <div>
-      <h2>AddMovie</h2>
+      <h2>Add a Movie</h2>
       <form onSubmit={addMovie}>
-        <input
+        <TextField
+          id="title-input"
+          label="add movie title"
           type="text"
           placeholder="...title"
+          variant="outlined"
           value={newMovie.title}
           onChange={(event) =>
             setNewMovie({ ...newMovie, title: event.target.value })
           }
         />
-        <input
+
+        <TextField
+          id="url-input"
+          label="add poster url"
           type="text"
           placeholder="...url"
+          variant="outlined"
           value={newMovie.poster}
           onChange={(event) =>
             setNewMovie({ ...newMovie, poster: event.target.value })
           }
         />
-        <textarea
+
+        <TextField
+          id="description-input"
+          label="add movie description"
           type="text"
           placeholder="description..."
+          variant="outlined"
+          multiline
+          rows={2}
           value={newMovie.description}
           onChange={(event) =>
             setNewMovie({ ...newMovie, description: event.target.value })
           }
         />
-        <select
-          name="genre"
-          onChange={(event) =>
-            setNewMovie({ ...newMovie, genre_id: event.target.value })
-          }
-        >
-          {/* maps over genres to create option for each */}
-          {genres &&
-            genres.map((genre) => (
-              <option key={genre.id} value={genre.id}>
-                {genre.name}
-              </option>
-            ))}
-        </select>
-        <button type="submit">Submit</button>
+
+        <FormControl variant="outlined" size="small">
+          <InputLabel id="genre-add-select">Genre</InputLabel>
+          <Select
+            name="genre"
+            labelId="genre-add"
+            id="genre-add"
+            value={newMovie.genre_id}
+            onChange={(event) =>
+              setNewMovie({ ...newMovie, genre_id: event.target.value })
+            }
+          >
+            <MenuItem key={0} value={0}>
+              ...select genre
+            </MenuItem>
+            {/* maps over genres to create option for each */}
+            {genres &&
+              genres.map((genre) => (
+                <MenuItem key={genre.id} value={genre.id}>
+                  {genre.name}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+
+        <Button variant="outlined" color="primary" type="submit">
+          Submit
+        </Button>
         {/* routes back home on click */}
-        <button
+        <Button
+          variant="outlined"
+          color="secondary"
           onClick={() => {
             history.push('/');
           }}
         >
           Cancel
-        </button>
+        </Button>
       </form>
     </div>
   );

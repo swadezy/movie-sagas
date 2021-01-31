@@ -21,6 +21,8 @@
 .card-image {
   padding: 0px;
   margin: auto;
+  max-width: 185px;
+  max-height: 280px;
 }
 
 .movie-card {
