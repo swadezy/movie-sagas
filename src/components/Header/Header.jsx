@@ -12,21 +12,21 @@ function Header() {
         {/* handy little home button for every page */}
         <Box m={1} display="inline">
           <Link to="/">
-            <Button className="btn-padding" variant="contained" color="primary">
+            <Button className="btn-padding" variant="contained" color="default">
               Home
             </Button>
           </Link>
         </Box>
         <Box m={1} display="inline">
           <Link to="/addMovie">
-            <Button className="btn-padding" variant="contained" color="primary">
+            <Button className="btn-padding" variant="contained" color="default">
               Add Movie
             </Button>
           </Link>
         </Box>
         <Box m={1} display="inline">
           <Link to="/admin">
-            <Button className="btn-padding" variant="contained" color="primary">
+            <Button className="btn-padding" variant="contained" color="default">
               Admin
             </Button>
           </Link>

@@ -33,3 +33,7 @@
 .card-btns {
     margin: auto;
 }
+
+.genre-filter {
+    display: inline-block;
+}
