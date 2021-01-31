@@ -1,9 +1,10 @@
-import { HashRouter as Router, Link, useHistory } from 'react-router-dom';
+import { HashRouter as Router, Link } from 'react-router-dom';
 import './Header.css';
 
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 
+// this component allows routing back home or to add movie from any page
 function Header() {
   return (
     <Router>
@@ -17,6 +18,8 @@ function Header() {
             </Button>
           </Link>
         </Box>
+
+        {/* handy little add movie button for every page */}
         <Box m={1} display="inline">
           <Link to="/addMovie">
             <Button className="btn-padding" variant="contained" color="default">
@@ -24,6 +27,8 @@ function Header() {
             </Button>
           </Link>
         </Box>
+
+        {/* handy little admin for every page */}
         <Box m={1} display="inline">
           <Link to="/admin">
             <Button className="btn-padding" variant="contained" color="default">

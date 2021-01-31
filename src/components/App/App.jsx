@@ -14,11 +14,15 @@ function App() {
       <Router>
         {/* home page is movie list */}
         <Route path="/" exact component={MovieList} />
+
         {/* details and edit pages route to dedicated ids */}
         <Route path="/details/:id" component={Details} />
         <Route path="/edit/:id" component={EditMovie} />
+
         {/* add movie page */}
         <Route path="/addMovie" component={AddMovie} />
+
+        {/* admin page for genre management */}
         <Route path="/admin" component={Admin} />
       </Router>
     </div>

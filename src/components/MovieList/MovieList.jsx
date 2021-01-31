@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './MovieList.css';
 
-// Material UI stuff
+// Material UI gunk
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -17,6 +17,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 
+// this component shows the user all movies currently in the db, allows them to search, filter, and navigate to detail/edit pages
 function MovieList() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -60,8 +61,7 @@ function MovieList() {
   return (
     <main>
       <h2>Movie List</h2>
-
-      {/* take search string and filters movie list with that string */}
+      {/* this form takes search string and filters movie list with that string */}
       <form className="search-form" onSubmit={handleFilter}>
         <TextField
           id="search-input"
@@ -85,6 +85,7 @@ function MovieList() {
       </form>
       <br></br>
 
+      {/* this select takes a genre and filters movie list to just those with that genre */}
       <FormControl variant="outlined" size="small">
         <InputLabel id="genre-filter-select">Genre</InputLabel>
         <Select
@@ -115,6 +116,7 @@ function MovieList() {
         Filter by Genre
       </Button>
 
+      {/* this resets the movie list, effectively clearing the search and genre filter */}
       <br></br>
       <br></br>
       <Button variant="outlined" color="secondary" onClick={handleClear}>
@@ -123,6 +125,7 @@ function MovieList() {
       <br></br>
       <br></br>
 
+      {/* maps over movies to create a card for each, with routing buttons to their detail and edit pages */}
       <section className="movies">
         {movies.map((movie) => {
           return (
@@ -148,6 +151,7 @@ function MovieList() {
                   >
                     Details
                   </Button>
+
                   {/* routes to dedicated edit page on click */}
                   <Button
                     variant="outlined"

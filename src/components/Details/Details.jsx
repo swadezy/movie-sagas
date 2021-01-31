@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import './Details.css'
 
+// this component shows various info on a single movie selected from the movie list, with a dedicated url
 function Details() {
   const page = useParams();
   const dispatch = useDispatch();

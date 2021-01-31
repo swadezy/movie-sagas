@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+// queries db for all genres in genre table
 router.get('/', (req, res) => {
   const query = `SELECT * FROM genres ORDER BY "id" ASC`;
   pool

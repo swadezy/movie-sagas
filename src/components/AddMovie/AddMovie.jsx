@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+// Material UI gunk
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import TextField from '@material-ui/core/TextField';
@@ -10,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 
+// this component is how users can add new movies to their movie list
 function AddMovie() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -40,6 +42,8 @@ function AddMovie() {
   return (
     <div>
       <h2>Add a Movie</h2>
+
+      {/* new movie title input */}
       <form onSubmit={addMovie}>
         <TextField
           id="title-input"
@@ -53,6 +57,7 @@ function AddMovie() {
           }
         />
 
+        {/* new movie poster url input */}
         <TextField
           id="url-input"
           label="add poster url"
@@ -65,6 +70,7 @@ function AddMovie() {
           }
         />
 
+        {/* new movie description input */}
         <TextField
           id="description-input"
           label="add movie description"
@@ -79,6 +85,7 @@ function AddMovie() {
           }
         />
 
+        {/* new movie genre selector */}
         <FormControl variant="outlined" size="small">
           <InputLabel id="genre-add-select">Genre</InputLabel>
           <Select
@@ -103,10 +110,12 @@ function AddMovie() {
           </Select>
         </FormControl>
 
+        {/* submit button tells form to call addMovie function */}
         <Button variant="outlined" color="primary" type="submit">
           Submit
         </Button>
-        {/* routes back home on click */}
+
+        {/* cancel button routes back home on click */}
         <Button
           variant="outlined"
           color="secondary"

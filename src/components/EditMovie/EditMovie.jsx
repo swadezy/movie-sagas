@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import './EditMovie.css';
 
+// this component allows user to update various info on a single movie, with a dedicated url
 function EditMovie() {
   const page = useParams();
   const dispatch = useDispatch();
@@ -38,7 +39,11 @@ function EditMovie() {
         <img src={movie?.poster} alt={movie?.title} className="grid-poster" />
         <h4 className="grid-existing-header">Existing Movie Info</h4>
         <h4 className="grid-updated-header">Updated Movie Info</h4>
+
+        {/* existing movie title */}
         <div className="grid-existing-title">{movie?.title}</div>
+
+        {/* updated movie title input */}
         <form onSubmit={handleEdit}>
           <input
             type="text"
@@ -50,7 +55,11 @@ function EditMovie() {
             }
           />
         </form>
+
+        {/* existing movie description */}
         <div className="grid-existing-description">{movie?.description}</div>
+
+        {/* updated movie description input */}
         <form onSubmit={handleEdit}>
           <textarea
             type="text"
@@ -62,10 +71,13 @@ function EditMovie() {
             }
           />
         </form>
+
         <div className="grid-button-group">
+          {/* submit button calls handleEdit function */}
           <button className="btn" onClick={handleEdit}>
             Submit
           </button>
+
           {/* cancel button routes back to details on click */}
           <button
             className="btn"

@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
+// queries db for movie information, as well as the total number of movies in the db
 router.get('/', (req, res) => {
-  // this asks db for movie information, as well as the total number of movies in the db
   const query = `SELECT "movies".id, "movies".title, "movies".poster, "movies".description, SUM(COUNT("movies")) OVER() AS "total_movies"
   FROM "movies" GROUP BY "movies".id, "movies".title, "movies".poster, "movies".description
   ORDER BY "movies".id ASC LIMIT 10`;
@@ -18,6 +18,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// queries db for all columns from movie table as well as all genres for a single movie id
 router.get('/:id', (req, res) => {
   console.log('in get movie detail with id', req.params.id);
   const query = `SELECT "movies".title, "movies".poster, "movies".description, STRING_AGG("genres".name, ', ') AS "genres" FROM "movies"
@@ -36,7 +37,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-
+// queries db for all movies that include the given search string
 router.get('/search/:query', (req, res) => {
   console.log('received filter query', req.params.query);
   const filterText = '%'+req.params.query+'%';
@@ -54,8 +55,7 @@ router.get('/search/:query', (req, res) => {
     });
 });
 
-
-
+// queries db for all movies that include the given genre
 router.get('/genre/:id', (req, res) => {
   console.log('received filter genre', req.params.id);
   const query = `SELECT "movies".id, "movies".title, "movies".poster FROM "movies"
@@ -99,6 +99,7 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+// queries db to update movie details at given id
 router.put('/:id', (req, res) => {
   console.log('in put with movie id', req.params.id);
   console.log('also received', req.body.title, req.body.description);
@@ -117,6 +118,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
+// adds new movie to movie table, then to junction table
 router.post('/', (req, res) => {
   console.log('in post server with', req.body);
   // RETURNING "id" will give us back the id of the created movie
